@@ -5,6 +5,7 @@
 
 const int PROTOCOL = 189;
 const std::string GAME_VERSION = "4.23";
+const bool ANDROID = false;
 
 std::string MD5(const std::string& input) {
 	unsigned char digest[EVP_MAX_MD_SIZE];
@@ -27,11 +28,19 @@ std::string MD5(const std::string& input) {
 }
 
 std::string GenerateKLV(const int protocol, const int hash, const std::string& version, const std::string& rid) {
-	const std::string key1 = "0b02ea1d8610bab98fbc1d574e5156f3";
-	const std::string key2 = "b414b94c3279a2099bd817ba3a025cfc";
-	const std::string key3 = "bf102589b28a8cc3017cba9aec1306f5";
-	const std::string key4 = "dded9b27d5ce7f8c8ceb1c9ba25f378d";
-	const std::string value = key1 + version + key2 + std::to_string(hash) + key3 + rid + key4 + std::to_string(protocol);
+	std::string value;
+        const std::string key3 = "bf102589b28a8cc3017cba9aec1306f5";
+        if (ANDROID) {
+	    const std::string key1 = "949b7649dac84a00aa8144b05bfb1bee";
+	    const std::string key2 = "d458b26b985802d71bd884342fb773e6";
+	    const std::string key4 = "b7592a92bdb12b22073d7bd5ed7edaf0";
+            value = key1 + version + key2 + std::to_string(hash) + key3 + std::to_string(protocol) + rid + key4;
+        } else {
+	    const std::string key1 = "0b02ea1d8610bab98fbc1d574e5156f3";
+	    const std::string key2 = "b414b94c3279a2099bd817ba3a025cfc";
+	    const std::string key4 = "dded9b27d5ce7f8c8ceb1c9ba25f378d";
+            value = key1 + version + key2 + std::to_string(hash) + key3 + rid + key4 + std::to_string(protocol);
+	}
 
 	return MD5(value);
 }
