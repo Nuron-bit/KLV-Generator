@@ -3,9 +3,8 @@
 #include <algorithm>
 #include <openssl/evp.h>
 
-const int PROTOCOL = 189;
-const std::string GAME_VERSION = "4.23";
-const bool ANDROID = false;
+const int PROTOCOL = 191;
+const std::string GAME_VERSION = "4.25";
 
 std::string MD5(const std::string& input) {
 	unsigned char digest[EVP_MAX_MD_SIZE];
