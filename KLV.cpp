@@ -28,19 +28,12 @@ std::string MD5(const std::string& input) {
 }
 
 std::string GenerateKLV(const int protocol, const int hash, const std::string& version, const std::string& rid) {
-	std::string value;
-        const std::string key3 = "92e9bf1aad214c69b1f3a18a03aae8dc";
-        if (ANDROID) { // 4.23
-	    const std::string key1 = "949b7649dac84a00aa8144b05bfb1bee";
-	    const std::string key2 = "d458b26b985802d71bd884342fb773e6";
-	    const std::string key4 = "b7592a92bdb12b22073d7bd5ed7edaf0";
-            value = key1 + version + key2 + std::to_string(hash) + key3 + std::to_string(protocol) + rid + key4;
-        } else { // 4.24
-	    const std::string key1 = "42e2ae20305244ddaf9b0de5e897fc74";
-	    const std::string key2 = "ccc18d2e2ca84e0a81ba29a0af2edc9c";
-	    const std::string key4 = "58b92130c89c496b96164b776d956242";
-            value = version + key1 + std::to_string(protocol) + key2 + std::to_string(hash) + key3 + rid + key4;
-	}
-
-	return MD5(value);
+	const static std::string keys[] = {
+        "13c93f386db9da3e00dda16d770b0c83",
+        "6b1c01f9128a62a2c97b1a0da4612168",
+        "3402d278d8519a522c94d122e98e2e49",
+        "ba95613bc0fd94a9d89c5919670e7d5d"
+   	};
+	
+	return MD5(version + keys[0] + std::to_string(protocol) + keys[1] + std::to_string(hash) + keys[2] + rid + keys[3]);
 }
