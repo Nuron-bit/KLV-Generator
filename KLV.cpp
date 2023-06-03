@@ -7,7 +7,14 @@ const int PROTOCOL = 191;
 const std::string GAME_VERSION = "4.27";
 
 namespace hash {
-	std::string MD5(const std::string& input) {
+	std::string sha256(const std::string& input) {
+		std::string hash;
+		// Implement sha256 here
+		std::transform(hash.begin(), hash.end(), hash.begin(), ::tolower);
+		return hash;
+	}
+	
+	std::string md5(const std::string& input) {
 		unsigned char digest[EVP_MAX_MD_SIZE];
 		unsigned int digest_len;
 		EVP_MD_CTX* ctx = EVP_MD_CTX_new();
