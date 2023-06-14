@@ -1,4 +1,5 @@
 #define _CRT_SECURE_NO_WARNINGS
+#include <array>
 #include <string>
 #include <algorithm>
 #include <openssl/evp.h>
