@@ -3,8 +3,8 @@
 #include <algorithm>
 #include <openssl/evp.h>
 
-const int PROTOCOL = 191;
-const std::string GAME_VERSION = "4.27";
+const int PROTOCOL = 192;
+const std::string GAME_VERSION = "4.3";
 
 namespace hash {
 	std::string sha256(const std::string& input) {
